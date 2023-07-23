@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <title>Cocktail Magazine</title>
+</head>
+<body>
+    <h1 id="titlu">Cocktail Magazine</h1>
+    <div class="bigContainer">
+    <div class="container">
+    <div>
+        <form action="/" method="post">
+            <label><h2>Vrei sa incerci ceva nou?</h2></label>
+            <button type="submit" class="button">Apasa aici</button>
+        </form>
+        
+    </div>
+    
+    <% if(locals.activity && locals.ingredients && locals.measures) {%>
+        <p><%= activity.strDrink %></p>
+        <p>Reteta:</p>
+        <ul>
+        <% for(let i=0; i<ingredients.length;i++) {%>
+                <li><%= ingredients[i] %> <%= measures[i] %></li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <%if (locals.error) {%>
+        <div id="tag-error" class="tag-error">
+          <%=error%>
+        </div>
+        <%}%>
+    
+    </div>
+
+
+    <div class="container">
+    <div>
+        <h2>Cauta dupa nume:</h2>
+        <form action="/search-name" method="post">
+            <label for="numeBautura" >Nume:</label>
+            <input type="text" name="numeBautura">
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+    <% if(locals.bauturi && locals.bauturi.length !==null) {%>
+            <ul>
+                <% for(let i =0;i<bauturi.length;i++) { %>
+                    <li><%= bauturi[i] %></li>
+                <% } %>
+            </ul>
+        <% } %>
+    <% if(locals.ingredientss) {%>
+        <h4>Ingrediente pentru <%= bauturi[0] %>:</h4>
+        <ul>
+            <% for(let i =0;i<ingredientss.length;i++) { %>
+                <li><%= ingredientss[i] %></li>
+            <% } %>
+        </ul>
+        <% } %>
+
+        <%if (locals.error2) {%>
+            <div id="tag-error" class="tag-error">
+              <%=error2%>
+            </div>
+            <%}%>
+            
+
+    </div>
+
+    <div class="container">
+    <div>
+        <h2>Cauta dupa ingredient:</h2>
+        <form action="/search-ingredient" method="post">
+            <label for="numeIngredient">Ingredient:</label>
+            <input type="text" name="numeIngredient">
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+
+    <% if(locals.bauturaDupaIngredient) {%>
+        <ul>
+            <% for(let i =0;i<bauturaDupaIngredient.length;i++) { %>
+                <li><%= bauturaDupaIngredient[i] %></li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <%if (locals.error3) {%>
+        <div id="tag-error" class="tag-error">
+          <%=error3%>
+        </div>
+        <%}%>
+    </div>
+</div>
+
+</body>
+</html>
